@@ -1,0 +1,19 @@
+services:
+  frontend:
+    image: ${DOCKER_USERNAME}/${FRONTEND_IMAGE_NAME}:latest
+    env_file: ./.env
+    container_name: frontend_${PROJECT_SUFFIX}
+    command: >
+      sh -c "npm run build && npm run start"
+  frontend_gateway:
+    image: ${DOCKER_USERNAME}/${FRONTEND_NGINX_IMAGE_NAME}:latest
+    env_file: ./.env
+    container_name: frontend_gateway_${PROJECT_SUFFIX}
+    depends_on:
+      - frontend
+    ports:
+      - "${OUTER_PORT}:${INNER_PORT}"
+    restart: unless-stopped
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
