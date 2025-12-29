@@ -1,15 +1,10 @@
 'use client';
 
 import Aurora from './Aurora';
-import { useThemeMode } from './ThemeProvider';
 
 export default function ThemeBackground() {
-  const { mode } = useThemeMode();
-  
-  const backgroundColor = mode === 'dark' ? '#0a0e1a' : '#F0F8FB';
-  const auroraColors = mode === 'dark' 
-    ? ["#1a2332", "#0039a6", "#1a2332"]
-    : ["#ffffff", "#0039a6", "#ffffff"];
+  const backgroundColor = '#E8E8E8';
+  const auroraColors = ["#FEFEFE", "#FEFEFE", "#FEFEFE"];
 
   return (
     <div 

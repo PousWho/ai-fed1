@@ -13,31 +13,17 @@ const ThemeContext = createContext({
 export const useThemeMode = () => useContext(ThemeContext);
 
 export default function ThemeProvider({ children }) {
-  const [mode, setMode] = useState('light');
-  const [mounted, setMounted] = useState(false);
+  const mode = 'light'; // Всегда используем светлую тему
 
   useEffect(() => {
-    setMounted(true);
-    const savedMode = localStorage.getItem('themeMode') || 'light';
-    setMode(savedMode);
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
   }, []);
 
-  const toggleColorMode = () => {
-    const newMode = mode === 'light' ? 'dark' : 'light';
-    setMode(newMode);
-    localStorage.setItem('themeMode', newMode);
-    if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute('data-theme', newMode);
-    }
-  };
+  const toggleColorMode = () => {}; // Пустая функция для совместимости
 
-  useEffect(() => {
-    if (mounted && typeof document !== 'undefined') {
-      document.documentElement.setAttribute('data-theme', mode);
-    }
-  }, [mode, mounted]);
-
-  const theme = getTheme(mode);
+  const theme = getTheme();
 
   return (
     <ThemeContext.Provider value={{ mode, toggleColorMode }}>

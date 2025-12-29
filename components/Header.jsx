@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { useTheme } from '@mui/material/styles';
 import { 
   AppBar, 
   Toolbar, 
@@ -20,13 +19,10 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const theme = useTheme();
-  const isDark = theme.palette.mode === 'dark';
 
   const handleLogoClick = (e) => {
     if (pathname === '/') {
@@ -125,16 +121,10 @@ export default function Header() {
                 Вступить
               </Button>
             </Link>
-            <Box sx={{ display: 'flex', alignItems: 'center', ml: -1 }}>
-              <ThemeToggle />
-            </Box>
           </Box>
 
           {/* Mobile Menu Buttons */}
           <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', mr: -1 }}>
-              <ThemeToggle />
-            </Box>
             <IconButton
               edge="end"
               color="inherit"
@@ -156,14 +146,10 @@ export default function Header() {
         sx={{
           display: { xs: 'block', md: 'none' },
           '& .MuiDrawer-paper': {
-            backgroundColor: isDark 
-              ? 'rgba(26, 32, 51, 0.95)' 
-              : 'rgba(255, 255, 255, 0.95)',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(12px)',
             mt: '64px',
-            borderBottom: isDark
-              ? '1px solid rgba(255, 255, 255, 0.15)'
-              : '1px solid rgba(255, 255, 255, 0.3)',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
           },
         }}
       >
