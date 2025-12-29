@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Box, Container, Typography, Stack, Paper, useTheme } from '@mui/material';
+import { Box, Container, Typography, Stack, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 
 const fadeUp = {
@@ -10,9 +10,7 @@ const fadeUp = {
 };
 
 export default function Footer() {
-  const theme = useTheme();
-  const isDark = theme.palette.mode === 'dark';
-  const linkColor = isDark ? 'rgba(255, 255, 255, 0.9)' : '#212529';
+  const linkColor = '#212529';
   
   return (
     <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', px: { xs: 2, sm: 3, md: 4 }, pb: 5 }}>
@@ -83,7 +81,7 @@ export default function Footer() {
                       sx={{
                         color: linkColor,
                         fontWeight: 500,
-                        textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.2)' : 'none',
+                        textShadow: 'none',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -99,7 +97,7 @@ export default function Footer() {
                       sx={{
                         color: linkColor,
                         fontWeight: 500,
-                        textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.2)' : 'none',
+                        textShadow: 'none',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -115,7 +113,7 @@ export default function Footer() {
                       sx={{
                         color: linkColor,
                         fontWeight: 500,
-                        textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.2)' : 'none',
+                        textShadow: 'none',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -133,7 +131,7 @@ export default function Footer() {
                       sx={{
                         color: linkColor,
                         fontWeight: 500,
-                        textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.2)' : 'none',
+                        textShadow: 'none',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -149,7 +147,7 @@ export default function Footer() {
                       sx={{
                         color: linkColor,
                         fontWeight: 500,
-                        textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.2)' : 'none',
+                        textShadow: 'none',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -165,7 +163,7 @@ export default function Footer() {
                       sx={{
                         color: linkColor,
                         fontWeight: 500,
-                        textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.2)' : 'none',
+                        textShadow: 'none',
                         '&:hover': {
                           color: 'primary.main',
                         },

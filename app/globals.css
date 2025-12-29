@@ -141,7 +141,7 @@ main > * {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-3836px); /* 14 партнеров * 274px */
+    transform: translateX(-4110px); /* 15 партнеров * 274px */
   }
 }
 

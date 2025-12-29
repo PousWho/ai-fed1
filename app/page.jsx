@@ -67,35 +67,42 @@ export default function Home() {
             alignItems: 'center', 
             justifyContent: 'center',
             textAlign: 'center',
-            py: 10,
+            py: { xs: 8, md: 10 },
+            pt: { xs: 'calc(80px - 10px)', md: 10 },
             px: 2
           }}
         >
           <Container maxWidth="md">
             <Stack spacing={3}>
-              <Typography 
-                variant="h2" 
-                component="h1"
-                sx={{ 
-                  fontWeight: 700, 
-                  lineHeight: 1.2,
-                  '& .federation-text': {
-                    color: '#ffffff',
-                    textShadow: '0 0 1px rgba(0, 0, 0, 0.3), 0 0 2px rgba(0, 0, 0, 0.2), 1px 1px 0 rgba(128, 128, 128, 0.5)',
-                    WebkitTextStroke: '0.5px rgba(128, 128, 128, 0.3)',
-                  },
-                  '& .blue-text': {
-                    color: 'primary.main',
-                  },
-                  '& .red-text': {
-                    color: 'secondary.main',
-                  },
-                }}
-              >
-                <span className="federation-text">Федерация</span>{' '}
-                <span className="blue-text">искусственного</span>{' '}
-                <span className="red-text">интеллекта</span>
-              </Typography>
+              <Box sx={{ 
+                position: 'relative',
+                top: { xs: '-10px', md: 0 },
+                mt: { xs: '-10px', md: 0 }
+              }}>
+                <Typography 
+                  variant="h2" 
+                  component="h1"
+                  sx={{ 
+                    fontWeight: 700, 
+                    lineHeight: 1.2,
+                    '& .federation-text': {
+                      color: '#ffffff',
+                      textShadow: '0 0 1px rgba(0, 0, 0, 0.3), 0 0 2px rgba(0, 0, 0, 0.2), 1px 1px 0 rgba(128, 128, 128, 0.5)',
+                      WebkitTextStroke: '0.5px rgba(128, 128, 128, 0.3)',
+                    },
+                    '& .blue-text': {
+                      color: 'primary.main',
+                    },
+                    '& .red-text': {
+                      color: 'secondary.main',
+                    },
+                  }}
+                >
+                  <span className="federation-text">Федерация</span>{' '}
+                  <span className="blue-text">искусственного</span>{' '}
+                  <span className="red-text">интеллекта</span>
+                </Typography>
+              </Box>
               <Typography 
                 variant="h6" 
                 sx={{ 

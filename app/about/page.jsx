@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Box, Container, Typography, Card, CardContent, Grid, Stack, IconButton, useTheme } from '@mui/material';
+import { Box, Container, Typography, Card, CardContent, Grid, Stack, IconButton } from '@mui/material';
 import GradientText from '@/components/GradientText';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -32,6 +32,7 @@ function PartnersSlider() {
     { name: 'СИБИТ', logo: '/partners/СИБИТ_ЛОГОТИП.png' },
     { name: 'Партнер', logo: '/partners/logo.png' },
     { name: 'Партнер', logo: '/partners/logo-2.png' },
+    { name: 'Партнер', logo: '/partners/logo-2-2.png' },
     { name: 'Партнер', logo: '/partners/logo-Photoroom.png' },
     { name: 'Партнер', logo: '/partners/MainLogo-ClWcpPWu.png' },
     { name: 'Партнер', logo: '/partners/__-____-07.png' },
@@ -49,7 +50,7 @@ function PartnersSlider() {
           display: 'flex',
           gap: 3,
           width: 'fit-content',
-          animation: 'partners-slide 42s linear infinite', // 42s = 3s на элемент * 14 элементов
+          animation: 'partners-slide 45s linear infinite', // 45s = 3s на элемент * 15 элементов
         }}
       >
         {duplicatedPartners.map((partner, index) => (
@@ -106,8 +107,6 @@ function PartnersSlider() {
 
 export default function AboutPage() {
   const [currentCertificateIndex, setCurrentCertificateIndex] = useState(0);
-  const theme = useTheme();
-  const isDark = theme.palette.mode === 'dark';
 
   const whatWeDo = [
     'Разрабатываем и проводим образовательные программы',
@@ -374,25 +373,36 @@ export default function AboutPage() {
             sx={{ mt: { xs: 4, md: 6 } }}
           >
             <Card sx={{ 
+              backgroundColor: '#ffffff !important',
+              color: '#212529 !important',
+              '& .MuiTypography-root': {
+                color: 'inherit !important',
+              },
+              '& .MuiTypography-body1, & .MuiTypography-body2, & .MuiTypography-h1, & .MuiTypography-h2, & .MuiTypography-h3, & .MuiTypography-h4, & .MuiTypography-h5, & .MuiTypography-h6': {
+                color: 'inherit !important',
+              },
+              '& [class*="MuiTypography-colorPrimary"]': {
+                color: 'primary.main !important',
+              },
+              '& [class*="MuiTypography-colorSecondary"]': {
+                color: 'text.secondary !important',
+              },
               '&:hover': { 
-                transform: 'none',
-                translateY: '0',
-                boxShadow: (theme) => theme.palette.mode === 'dark'
-                  ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                  : '0 4px 16px rgba(0, 86, 179, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05)',
-                backgroundColor: (theme) => theme.palette.mode === 'dark'
-                  ? 'rgba(26, 32, 51, 0.4)'
-                  : '#ffffff',
-                borderColor: (theme) => theme.palette.mode === 'dark'
-                  ? 'rgba(255, 255, 255, 0.15)'
-                  : 'rgba(0, 86, 179, 0.2)',
+                transform: 'none !important',
+                translateY: '0 !important',
+                boxShadow: '0 4px 16px rgba(0, 86, 179, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05) !important',
+                backgroundColor: '#ffffff !important',
+                borderColor: 'rgba(0, 86, 179, 0.2) !important',
+                '& .MuiTypography-root': {
+                  color: 'inherit !important',
+                },
               } 
             }}>
               <Box sx={{ display: { xs: 'block', md: 'flex' } }}>
                 <Box 
                   sx={{ 
                     width: { xs: '100%', md: '40%' },
-                    bgcolor: isDark ? 'rgba(255, 255, 255, 0.05)' : 'grey.200',
+                    bgcolor: 'grey.200',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -429,7 +439,7 @@ export default function AboutPage() {
                       fontWeight: 700, 
                       mb: 3,
                       textAlign: { xs: 'center', md: 'left' },
-                      color: isDark ? '#ffffff' : 'primary.main'
+                      color: 'primary.main'
                     }}
                   >
                     Юрий Головко
@@ -459,14 +469,22 @@ export default function AboutPage() {
                   </Stack>
                   <Card 
                     sx={{ 
-                      bgcolor: isDark ? 'rgba(255, 255, 255, 0.05)' : 'primary.50',
+                      bgcolor: '#ffffff !important',
                       border: '1px solid',
-                      borderColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'primary.200',
+                      borderColor: 'primary.200',
                       p: 3,
+                      color: '#212529 !important',
+                      '& .MuiTypography-root': {
+                        color: 'inherit !important',
+                      },
                       transition: 'all 0.3s ease',
                       '&:hover': {
                         transform: 'scale(1.02)',
                         boxShadow: '0 8px 24px rgba(0, 57, 166, 0.15)',
+                        backgroundColor: '#ffffff !important',
+                        '& .MuiTypography-root': {
+                          color: 'inherit !important',
+                        },
                       }
                     }}
                   >
