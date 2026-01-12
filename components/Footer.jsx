@@ -65,7 +65,7 @@ export default function Footer() {
                     textShadow: '0 1px 2px rgba(0,0,0,0.1)',
                   }}
                 >
-                  © 2025 Федерация развития ИИ. Все права защищены.
+                  © 2026 Федерация развития ИИ. Все права защищены.
                 </Typography>
               </Box>
 
@@ -82,6 +82,7 @@ export default function Footer() {
                         color: linkColor,
                         fontWeight: 500,
                         textShadow: 'none',
+                        whiteSpace: 'nowrap',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -98,6 +99,8 @@ export default function Footer() {
                         color: linkColor,
                         fontWeight: 500,
                         textShadow: 'none',
+                        whiteSpace: 'nowrap',
+                        display: 'inline-block',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -114,6 +117,7 @@ export default function Footer() {
                         color: linkColor,
                         fontWeight: 500,
                         textShadow: 'none',
+                        whiteSpace: 'nowrap',
                         '&:hover': {
                           color: 'primary.main',
                         },

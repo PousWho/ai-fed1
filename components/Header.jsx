@@ -54,17 +54,17 @@ export default function Header() {
         zIndex: 1300,
       }}
     >
-      <Toolbar>
-        <Container maxWidth="xl" sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, sm: 3, md: 4 } }}>
+      <Toolbar sx={{ minHeight: { xs: 56, sm: 64 }, px: { xs: 1, sm: 2 } }}>
+        <Container maxWidth="xl" sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 1, sm: 2, md: 3, lg: 4 } }}>
           {/* Логотип */}
           <Link href="/" style={{ textDecoration: 'none', marginRight: 'auto' }} onClick={handleLogoClick}>
             <Typography
               variant="h6"
               sx={{
                 fontWeight: 700,
-                fontSize: { xs: '1rem', md: '1.25rem' },
+                fontSize: { xs: '0.875rem', sm: '1rem', md: '1.125rem', lg: '1.25rem' },
                 whiteSpace: 'nowrap',
-                mr: { md: 4 },
+                mr: { xs: 1, sm: 2, md: 3, lg: 4 },
                 '& .federation-text': {
                   color: '#ffffff',
                   textShadow: '0 0 1px rgba(0, 0, 0, 0.3), 0 0 2px rgba(0, 0, 0, 0.2), 1px 1px 0 rgba(128, 128, 128, 0.5)',
@@ -85,7 +85,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Menu */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 3, ml: 'auto' }}>
+          <Box sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center', gap: { lg: 2, xl: 3 }, ml: 'auto' }}>
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} style={{ textDecoration: 'none' }}>
                 <Button
@@ -93,6 +93,9 @@ export default function Header() {
                     color: 'text.primary',
                     fontWeight: 500,
                     whiteSpace: 'nowrap',
+                    fontSize: { lg: '0.875rem', xl: '1rem' },
+                    px: { lg: 1.5, xl: 2 },
+                    py: { lg: 0.75, xl: 1 },
                     backdropFilter: 'blur(20px) saturate(180%)',
                     WebkitBackdropFilter: 'blur(20px) saturate(180%)',
                     backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -116,6 +119,9 @@ export default function Header() {
                   fontWeight: 500,
                   borderRadius: '12px',
                   whiteSpace: 'nowrap',
+                  fontSize: { lg: '0.875rem', xl: '1rem' },
+                  px: { lg: 2, xl: 2.5 },
+                  py: { lg: 0.75, xl: 1 },
                 }}
               >
                 Вступить
@@ -123,14 +129,17 @@ export default function Header() {
             </Link>
           </Box>
 
-          {/* Mobile Menu Buttons */}
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
+          {/* Mobile/Tablet Menu Buttons */}
+          <Box sx={{ display: { xs: 'flex', lg: 'none' }, alignItems: 'center', gap: 1 }}>
             <IconButton
               edge="end"
               color="inherit"
               aria-label="menu"
               onClick={handleMenuToggle}
-              sx={{ color: 'text.primary' }}
+              sx={{ 
+                color: 'text.primary',
+                p: { xs: 1, sm: 1.5 }
+              }}
             >
               {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </IconButton>
@@ -138,39 +147,42 @@ export default function Header() {
         </Container>
       </Toolbar>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile/Tablet Menu Drawer */}
       <Drawer
         anchor="top"
         open={isMenuOpen}
         onClose={handleMenuClose}
         sx={{
-          display: { xs: 'block', md: 'none' },
+          display: { xs: 'block', lg: 'none' },
           '& .MuiDrawer-paper': {
             backgroundColor: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(12px)',
-            mt: '64px',
+            mt: { xs: '56px', sm: '64px' },
             borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
+            maxHeight: { xs: 'calc(100vh - 56px)', sm: 'calc(100vh - 64px)' },
+            overflow: 'auto',
           },
         }}
       >
-        <Box sx={{ width: '100%', py: 2 }}>
-          <List>
+        <Box sx={{ width: '100%', py: { xs: 2, sm: 3 } }}>
+          <List sx={{ px: { xs: 1, sm: 2 } }}>
             {navLinks.map((link) => (
               <ListItem key={link.href} disablePadding>
                 <Link href={link.href} style={{ width: '100%', textDecoration: 'none' }} onClick={handleMenuClose}>
-                  <ListItemButton>
+                  <ListItemButton sx={{ py: { xs: 1.5, sm: 2 } }}>
                     <ListItemText 
                       primary={link.label}
                       primaryTypographyProps={{
                         color: 'text.primary',
                         fontWeight: 500,
+                        fontSize: { xs: '1rem', sm: '1.125rem' },
                       }}
                     />
                   </ListItemButton>
                 </Link>
               </ListItem>
             ))}
-            <ListItem disablePadding sx={{ mt: 2, px: 2 }}>
+            <ListItem disablePadding sx={{ mt: { xs: 1.5, sm: 2 }, px: { xs: 1, sm: 2 } }}>
               <Link href="/contacts?type=join" style={{ width: '100%', textDecoration: 'none' }} onClick={handleMenuClose}>
                 <Button
                   variant="contained"
@@ -179,6 +191,8 @@ export default function Header() {
                   sx={{
                     fontWeight: 500,
                     borderRadius: '12px',
+                    py: { xs: 1.25, sm: 1.5 },
+                    fontSize: { xs: '1rem', sm: '1.125rem' },
                   }}
                 >
                   Вступить
