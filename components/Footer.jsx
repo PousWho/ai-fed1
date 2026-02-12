@@ -82,7 +82,6 @@ export default function Footer() {
                         color: linkColor,
                         fontWeight: 500,
                         textShadow: 'none',
-                        whiteSpace: 'nowrap',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -99,8 +98,6 @@ export default function Footer() {
                         color: linkColor,
                         fontWeight: 500,
                         textShadow: 'none',
-                        whiteSpace: 'nowrap',
-                        display: 'inline-block',
                         '&:hover': {
                           color: 'primary.main',
                         },
@@ -117,7 +114,6 @@ export default function Footer() {
                         color: linkColor,
                         fontWeight: 500,
                         textShadow: 'none',
-                        whiteSpace: 'nowrap',
                         '&:hover': {
                           color: 'primary.main',
                         },
