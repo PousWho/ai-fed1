@@ -1,0 +1,10 @@
+services:
+  forms-api:
+    build: .
+    container_name: fii_forms_api
+    env_file: .env
+    ports:
+      # Только loopback: наружу порт не торчит, доступ — через nginx на этом же хосте.
+      # Прямой доступ извне позволил бы обходить rate-limit подделкой X-Forwarded-For.
+      - "127.0.0.1:${PORT:-4000}:${PORT:-4000}"
+    restart: unless-stopped

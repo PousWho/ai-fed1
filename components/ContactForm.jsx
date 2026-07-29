@@ -17,14 +17,25 @@ import {
   Stack,
 } from '@mui/material';
 
+// Лимиты длины должны совпадать со схемой бекенда (backend/server.js)
 const contactSchema = z.object({
-  name: z.string().min(2, 'Имя должно содержать минимум 2 символа'),
-  email: z.string().email('Некорректный email адрес'),
-  phone: z.string().optional(),
-  organization: z.string().optional(),
-  message: z.string().min(10, 'Сообщение должно содержать минимум 10 символов'),
+  name: z
+    .string()
+    .min(2, 'Имя должно содержать минимум 2 символа')
+    .max(200, 'Имя не должно превышать 200 символов'),
+  email: z.string().email('Некорректный email адрес').max(320, 'Email слишком длинный'),
+  phone: z.string().max(50, 'Телефон не должен превышать 50 символов').optional(),
+  organization: z.string().max(300, 'Название организации не должно превышать 300 символов').optional(),
+  message: z
+    .string()
+    .min(10, 'Сообщение должно содержать минимум 10 символов')
+    .max(5000, 'Сообщение не должно превышать 5000 символов'),
   consent: z.boolean().refine((val) => val === true, 'Необходимо согласие на обработку данных'),
+  website: z.string().optional(),
 });
+
+// Адрес бекенда форм; пустая строка = тот же домен (режим разработки)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 export default function ContactForm({ type = 'contact' }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,6 +55,7 @@ export default function ContactForm({ type = 'contact' }) {
       organization: '',
       message: '',
       consent: false,
+      website: '',
     },
   });
 
@@ -52,7 +64,7 @@ export default function ContactForm({ type = 'contact' }) {
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,6 +119,21 @@ export default function ContactForm({ type = 'contact' }) {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Honeypot: люди поле не видят, боты заполняют — бекенд такие заявки отбрасывает */}
+          <Controller
+            name="website"
+            control={control}
+            render={({ field }) => (
+              <input
+                {...field}
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+              />
+            )}
+          />
           <Stack spacing={3}>
             <Controller
               name="name"

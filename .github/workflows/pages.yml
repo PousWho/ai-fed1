@@ -31,15 +31,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # API-роуты (nodemailer и др.) несовместимы со статическим экспортом —
-      # на GitHub Pages серверного кода нет, поэтому убираем их перед сборкой
-      - name: Remove API routes
-        run: rm -rf app/api
-
       - name: Build static site
         run: npm run build
         env:
           GITHUB_PAGES: 'true'
+          # Адрес бекенда форм (repo variable); пока не задан — форма шлёт на свой домен
+          NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
