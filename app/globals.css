@@ -105,6 +105,33 @@ html {
   overflow-x: hidden;
 }
 
+@keyframes hero-rise {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+[data-hero-rise] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-hero-rise] {
+    animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-rise] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 html, body {
   width: 100%;
   min-height: 100vh;
@@ -200,3 +227,66 @@ main > * {
     @apply bg-background text-foreground;
   }
 }
+
+/* Light travels through the blue brain; the head itself stays still. */
+.hero-brain-energy { opacity: .5; }
+.hero-brain-signals { pointer-events: none; filter: drop-shadow(0 0 4px #00d9ff) drop-shadow(0 0 9px #00aaff); }
+.hero-brain-paths { stroke-dasharray: 20 100; }
+.hero-brain-wave { transform-origin: 174px 223px; opacity: 0; }
+.hero-eye-light { opacity: .35; filter: blur(3px); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-brain-energy { animation: brain-glow 4s ease-in-out infinite; }
+  .hero-brain-paths { animation: brain-signals 3s linear infinite; }
+  .hero-brain-node { animation: brain-node 3.2s ease-in-out infinite; }
+  .hero-brain-wave { animation: brain-wave 4s ease-out infinite; }
+  .hero-eye-light { animation: eye-light 4s ease-in-out infinite; }
+  .hero-brain-particle { animation: brain-particle 3.2s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-brain-particle { display: none; }
+}
+@keyframes brain-glow {
+  0%, 100% { opacity: .25; transform: scale(.85) translate(-4%, 4%); }
+  50% { opacity: .8; transform: scale(1.15) translate(8%, -6%); }
+}
+@keyframes brain-signals {
+  from { stroke-dashoffset: 240; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes brain-node {
+  0%, 100% { opacity: .35; transform: scale(.7); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+@keyframes brain-wave {
+  0% { opacity: 0; transform: scale(.45); }
+  25% { opacity: .65; }
+  85%, 100% { opacity: 0; transform: scale(1.65); }
+}
+@keyframes eye-light {
+  0%, 100% { opacity: .15; }
+  50% { opacity: .85; }
+}
+@keyframes brain-particle {
+  0%, 100% { opacity: .15; }
+  20%, 80% { opacity: 1; }
+}
+
+/* Shared navigation and keyboard feedback. */
+a, button, input, textarea { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible { outline: 3px solid #639eff; outline-offset: 4px; }
+footer a { text-decoration: none; transition: color .2s; }
+footer a:hover { color: #8ebeff; }
+::selection { background: #0039a6; color: white; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+main { padding-top: 112px; }
+@media (min-width: 900px) { main { padding-top: 128px; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .union-core-pulse { transform-origin: 68px 46.75px; animation: union-core-pulse 3.6s ease-in-out infinite; }
+  .union-core-ring { transform-origin: 68px 46.75px; animation: union-core-ring 10s linear infinite; }
+}
+@keyframes union-core-pulse { 0%,100% { opacity: .23; transform: scale(.72); } 45% { opacity: .88; transform: scale(1.16); } }
+@keyframes union-core-ring { to { transform: rotate(360deg); } }

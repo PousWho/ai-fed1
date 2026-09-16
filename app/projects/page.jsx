@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Box, Container, Typography, Card, CardContent, Grid, Stack } from '@mui/material';
+import PageIntro from '@/components/PageIntro';
 import GradientText from '@/components/GradientText';
 
 const fadeUp = {
@@ -34,52 +35,14 @@ const projects = [
 export default function ProjectsPage() {
   return (
     <Box sx={{ width: '100%', pt: 2 }}>
-      {/* Заголовок */}
-      <Box sx={{ width: '100%', py: 10, display: 'flex', justifyContent: 'center' }}>
-        <Container maxWidth="lg">
-          <Stack spacing={2} sx={{ textAlign: 'center' }}>
-            <motion.div
-              initial="hidden" 
-              whileInView="visible" 
-              variants={fadeUp} 
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <GradientText variant="h2" component="h1">Продукты и проекты</GradientText>
-            </motion.div>
-            <motion.div
-              initial="hidden" 
-              whileInView="visible" 
-              variants={fadeUp} 
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
-            >
-              <Typography variant="body1" sx={{ color: (theme) => theme.palette.mode === 'light' ? '#212529' : 'text.secondary' }}>
-                Мы создаем и развиваем собственные решения в области ИИ и автоматизации. 
-                Каждый проект — это ответ на конкретную задачу.
-              </Typography>
-            </motion.div>
-            <motion.div
-              initial="hidden" 
-              whileInView="visible" 
-              variants={fadeUp} 
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
-            >
-              <Typography variant="body2" sx={{ color: (theme) => theme.palette.mode === 'light' ? '#212529' : 'text.secondary', fontStyle: 'italic' }}>
-                Раздел постоянно пополняется новыми кейсами и продуктами.
-              </Typography>
-            </motion.div>
-          </Stack>
-        </Container>
-      </Box>
+      <Container maxWidth="lg"><PageIntro visual="projects" title="Продукты и проекты" description="Развиваем решения в области искусственного интеллекта и автоматизации — от конкретной задачи до практического результата." /></Container>
 
       {/* Проекты */}
-      <Box sx={{ width: '100%', py: 10, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ width: '100%', py: { xs: 4, md: 6 }, display: 'flex', justifyContent: 'center' }}>
         <Container maxWidth="xl">
           <Grid container spacing={3} justifyContent="center">
             {projects.map((project, index) => (
-              <Grid item xs={12} lg={6} key={project.id}>
+              <Grid size={{ xs: 12, lg: 6 }} key={project.id}>
                 <motion.div
                   variants={fadeScale}
                   initial="hidden"

@@ -17,8 +17,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Федерация развития искусственного интеллекта и цифровых технологий",
-  description: "Объединяем образование, бизнес и государство для развития ИИ и цифровых технологий",
+  metadataBase: new URL("https://федерацияии.рф"),
+  title: {
+    default: "Федерация искусственного интеллекта",
+    template: "%s — Федерация искусственного интеллекта",
+  },
+  description: "Объединяем тех, кто создаёт будущее искусственного интеллекта в России",
+  icons: {
+    icon: '/logo.webp',
+  },
 };
 
 export default function RootLayout({ children }) {

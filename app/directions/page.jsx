@@ -1,90 +1,145 @@
 'use client';
 
+import PageIntro from '@/components/PageIntro';
 import { motion } from 'framer-motion';
-import { Box, Container, Typography, Card, CardContent, Grid } from '@mui/material';
-import GradientText from '@/components/GradientText';
+import { Box, Container, Typography } from '@mui/material';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { directions } from '@/lib/homeContent';
+
+const ACCENT = '#0039a6';
+const GRAPHITE = '#1a1d21';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
 };
 
-const fadeScale = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1 },
-};
-
 export default function DirectionsPage() {
-  const directions = [
-    {
-      title: 'Образование',
-      description: 'Мы обучаем не теории, а тому, как ИИ реально помогает в работе. Программы адаптированы под разный уровень подготовки и задачи.',
-      icon: '🎓',
-    },
-    {
-      title: 'Бизнес',
-      description: 'Помогаем компаниям находить точки применения ИИ, запускать пилоты и получать результат.',
-      icon: '💼',
-    },
-    {
-      title: 'Государство и регионы',
-      description: 'Сопровождаем цифровые проекты, готовим специалистов, помогаем выстраивать долгосрочные программы развития.',
-      icon: '🏛️',
-    },
-    {
-      title: 'Мероприятия',
-      description: 'Проводим форумы, хакатоны, турниры и интенсивы, где участники работают с реальными задачами.',
-      icon: '📅',
-    },
-  ];
-
   return (
-    <Box sx={{ width: '100%', pt: 2 }}>
-      {/* Заголовок */}
-      <Box sx={{ width: '100%', py: 10, display: 'flex', justifyContent: 'center' }}>
-        <Container maxWidth="lg">
-          <motion.div
-            initial="hidden" 
-            whileInView="visible" 
-            variants={fadeUp} 
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <GradientText variant="h2" component="h1" sx={{ display: 'block', textAlign: 'center' }}>Направления деятельности</GradientText>
-          </motion.div>
-        </Container>
-      </Box>
+    <Box sx={{ width: '100%', py: { xs: 3, md: 4 }, backgroundColor: '#fbfbfa' }}>
+      <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5, lg: 6 } }}>
+        <PageIntro visual="directions" title={directions.h2} description={directions.subtitle} label={directions.label} />
 
-      {/* Направления */}
-      <Box sx={{ width: '100%', py: 10, display: 'flex', justifyContent: 'center' }}>
-        <Container maxWidth="xl">
-          <Grid container spacing={3} justifyContent="center">
-            {directions.map((direction, index) => (
-              <Grid item xs={12} md={6} key={index}>
-                <motion.div
-                  variants={fadeScale}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: index * 0.15 }}
+        {/* 6 направлений по ТЗ лист 3 */}
+        <Box role="list" sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          {directions.items.map((it, index) => (
+            <motion.div
+              key={it.id}
+              id={it.id}
+              style={{ scrollMarginTop: 120 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              variants={fadeUp}
+              transition={{ duration: 0.5, delay: index * 0.06 }}
+              role="listitem"
+            >
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '44px 1fr', md: '96px 1fr' },
+                  columnGap: { xs: 2, md: 3 },
+                  alignItems: 'start',
+                  py: { xs: 3, md: 4 },
+                  borderTop: '1px solid rgba(0,0,0,0.1)',
+                  '&:last-of-type': { borderBottom: '1px solid rgba(0,0,0,0.1)' },
+                  transition: 'background-color 0.2s',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 57, 166, 0.02)',
+                  },
+                }}
+              >
+                <Typography
+                  component="span"
+                  sx={{
+                    fontVariantNumeric: 'tabular-nums',
+                    fontWeight: 600,
+                    lineHeight: 1,
+                    fontSize: { xs: '1.2rem', md: '1.5rem' },
+                    color: it.emphasis ? ACCENT : '#aab0b7',
+                    pt: { md: 0.5 },
+                  }}
                 >
-                  <Card sx={{ height: '100%', textAlign: 'center' }}>
-                    <CardContent sx={{ p: 4 }}>
-                      <Typography variant="h2" sx={{ mb: 2 }}>{direction.icon}</Typography>
-                      <Typography variant="h5" component="h2" color="primary" sx={{ fontWeight: 600, mb: 2 }}>
-                        {direction.title}
-                      </Typography>
-                      <Typography variant="body1" color="text.secondary">
-                        {direction.description}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
+                  {it.order}
+                </Typography>
+
+                <Box>
+                  <Typography
+                    component="h2"
+                    sx={{
+                      m: 0,
+                      fontWeight: it.emphasis ? 700 : 600,
+                      letterSpacing: '-0.015em',
+                      lineHeight: 1.15,
+                      color: GRAPHITE,
+                      fontSize: it.emphasis
+                        ? { xs: '1.35rem', md: '1.95rem' }
+                        : { xs: '1.25rem', md: '1.75rem' },
+                    }}
+                  >
+                    {it.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      mt: 1.5,
+                      maxWidth: '68ch',
+                      color: '#4a5057',
+                      lineHeight: 1.6,
+                      fontSize: { xs: '0.95rem', md: '1.05rem' },
+                    }}
+                  >
+                    {it.short}
+                  </Typography>
+                </Box>
+              </Box>
+            </motion.div>
+          ))}
+        </Box>
+
+        {/* Ссылка назад на главную или к вступлению */}
+        <Box sx={{ mt: 6, display: 'flex', gap: 3, flexWrap: 'wrap', alignItems: 'center' }}>
+          <Link href="/join" style={{ textDecoration: 'none' }}>
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1,
+                px: 3.25,
+                py: 1.5,
+                borderRadius: '999px',
+                backgroundColor: ACCENT,
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: '1rem',
+                boxShadow: '0 4px 14px rgba(0,57,166,0.2)',
+                transition: 'background-color .2s',
+                '&:hover': { backgroundColor: '#002d85' },
+              }}
+            >
+              Вступить в Федерацию
+              <ArrowRight size={17} strokeWidth={2.2} />
+            </Box>
+          </Link>
+          <Link href="/" style={{ textDecoration: 'none' }}>
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 0.75,
+                color: GRAPHITE,
+                fontWeight: 600,
+                fontSize: '1rem',
+                '&:hover': { color: ACCENT },
+              }}
+            >
+              ← На главную
+            </Box>
+          </Link>
+        </Box>
+      </Container>
     </Box>
   );
 }

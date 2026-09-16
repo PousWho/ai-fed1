@@ -26,6 +26,9 @@ function createTransporter() {
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT || '587', 10),
     secure: process.env.SMTP_PORT === '465',
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 12000,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASSWORD,
@@ -50,7 +53,7 @@ export async function sendContactEmail(data) {
       ${data.organization ? `<p><strong>Организация:</strong> ${escapeHtml(data.organization)}</p>` : ''}
       <p><strong>Сообщение:</strong></p>
       <p>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>
-      <p><strong>Согласие на обработку ПДн:</strong> подтверждено, ${receivedAt}</p>
+      <p><strong>Согласие на обработку ПДн:</strong> подтверждено, ${receivedAt}; редакция ${data.consentVersion}; https://федерацияии.рф/consent</p>
     `,
     text: `
 Новая заявка с сайта
@@ -64,7 +67,7 @@ ${data.organization ? `Организация: ${data.organization}` : ''}
 Сообщение:
 ${data.message}
 
-Согласие на обработку ПДн: подтверждено, ${receivedAt}
+Согласие на обработку ПДн: подтверждено, ${receivedAt}; редакция ${data.consentVersion}; https://федерацияии.рф/consent
     `,
   };
 

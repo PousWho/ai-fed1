@@ -1,5 +1,7 @@
 venv/
 .git
+node_modules/
+.next/
 db.sqlite3
 .idea
 .vscode
@@ -7,3 +9,17 @@ db.sqlite3
 infra/
 Dockerfile
 .env
+.env.*
+!.env.example
+backend/node_modules/
+backend/.env
+backend/.env.*
+run_log.txt
+
+# Local document exports and scratch work (not website assets)
+output/
+tmp/
+.claude/
+coverage/
+out/
+build/

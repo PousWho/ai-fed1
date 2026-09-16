@@ -3,8 +3,7 @@ services:
     image: ${DOCKER_USERNAME}/${FRONTEND_IMAGE_NAME}:latest
     env_file: ./.env
     container_name: frontend_${PROJECT_SUFFIX}
-    command: >
-      sh -c "npm run build && npm run start"
+    command: npm run start
   frontend_gateway:
     image: ${DOCKER_USERNAME}/${FRONTEND_NGINX_IMAGE_NAME}:latest
     env_file: ./.env

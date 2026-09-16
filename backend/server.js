@@ -4,6 +4,7 @@ import rateLimit from 'express-rate-limit';
 import { z } from 'zod';
 import { sendContactEmail } from './email.js';
 
+export function createApp({ sendEmail = sendContactEmail } = {}) {
 const app = express();
 
 // Опечатка в числовой переменной не должна молча отключать лимит или ломать порт
@@ -18,7 +19,6 @@ function parsePositiveInt(raw, fallback) {
   return n;
 }
 
-const PORT = parsePositiveInt(process.env.PORT, 4000);
 
 // За nginx/прокси реальный IP клиента приходит в X-Forwarded-For
 if (process.env.TRUST_PROXY === 'true') {
@@ -30,6 +30,7 @@ const defaultOrigins = [
   'https://www.xn--80ahcbqaa4d6aza4h.xn--p1ai',
   'https://pouswho.github.io',
   'http://localhost:3000',
+  'http://localhost:3001',
 ];
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || defaultOrigins.join(','))
   .split(',')
@@ -56,14 +57,15 @@ const contactLimiter = rateLimit({
 });
 
 const contactSchema = z.object({
-  name: z.string().min(2).max(200),
-  email: z.string().email().max(320),
-  phone: z.string().max(50).optional(),
-  organization: z.string().max(300).optional(),
-  message: z.string().min(10).max(5000),
+  name: z.string().trim().min(2).max(200),
+  email: z.string().trim().email().max(320),
+  phone: z.string().trim().max(50).refine(value => !value || (/^[+\d\s()-]+$/.test(value) && value.replace(/\D/g, '').length >= 10 && value.replace(/\D/g, '').length <= 15)).optional(),
+  organization: z.string().trim().max(300).optional(),
+  message: z.string().trim().min(10).max(5000),
   type: z.enum(['partner', 'join', 'contact']),
   // Согласие на обработку ПДн обязательно и проверяется именно на сервере
   consent: z.literal(true),
+  consentVersion: z.literal('2026-09-11'),
   // Honeypot: скрытое поле, люди его не видят и не заполняют
   website: z.string().max(200).optional(),
 });
@@ -81,7 +83,7 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
       return res.json({ success: true });
     }
 
-    await sendContactEmail(data);
+    await sendEmail(data);
     return res.json({ success: true });
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -100,6 +102,8 @@ app.use((req, res) => {
 });
 
 // Ошибки express.json (битый JSON, слишком большое тело) должны отвечать JSON, а не HTML
+// Четыре аргумента необходимы Express для распознавания error middleware.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err, req, res, next) => {
   if (err.type === 'entity.parse.failed') {
     return res.status(400).json({ error: 'Неверный формат JSON' });
@@ -111,7 +115,5 @@ app.use((err, req, res, next) => {
   return res.status(500).json({ error: 'Внутренняя ошибка сервера' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend запущен на порту ${PORT}`);
-  console.log(`Разрешённые origin'ы: ${allowedOrigins.join(', ')}`);
-});
+return app;
+}

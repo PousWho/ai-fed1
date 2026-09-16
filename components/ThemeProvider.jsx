@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useEffect, createContext, useContext } from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { MotionConfig } from 'framer-motion';
 import getTheme from '@/lib/theme';
 
 const ThemeContext = createContext({
@@ -28,8 +28,7 @@ export default function ThemeProvider({ children }) {
   return (
     <ThemeContext.Provider value={{ mode, toggleColorMode }}>
       <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
+        <MotionConfig reducedMotion="user">{children}</MotionConfig>
       </MuiThemeProvider>
     </ThemeContext.Provider>
   );

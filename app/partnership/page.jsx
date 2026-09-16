@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Box, Container, Typography, Card, CardContent, Grid, Stack, List, ListItem, ListItemText, Button } from '@mui/material';
+import PageIntro from '@/components/PageIntro';
 import GradientText from '@/components/GradientText';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
@@ -46,36 +47,10 @@ export default function PartnershipPage() {
 
   return (
     <Box sx={{ width: '100%', pt: 2 }}>
-      {/* Заголовок */}
-      <Box sx={{ width: '100%', py: 10, display: 'flex', justifyContent: 'center' }}>
-        <Container maxWidth="lg">
-          <Stack spacing={2} sx={{ textAlign: 'center' }}>
-            <motion.div
-              initial="hidden" 
-              whileInView="visible" 
-              variants={fadeUp} 
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <GradientText variant="h2" component="h1">Партнерство</GradientText>
-            </motion.div>
-            <motion.div
-              initial="hidden" 
-              whileInView="visible" 
-              variants={fadeUp} 
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
-            >
-              <Typography variant="body1" sx={{ color: (theme) => theme.palette.mode === 'light' ? '#212529' : 'text.secondary' }}>
-                Мы открыты к партнерству и совместным проектам.
-              </Typography>
-            </motion.div>
-          </Stack>
-        </Container>
-      </Box>
+      <Container maxWidth="lg"><PageIntro visual="partnership" title="Партнёрство" description="Соединяем экспертизу, технологии и инициативы. Открыты к совместным программам и проектам." /></Container>
 
       {/* Форматы партнерства */}
-      <Box sx={{ width: '100%', py: 10, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ width: '100%', py: { xs: 4, md: 6 }, display: 'flex', justifyContent: 'center' }}>
         <Container maxWidth="xl">
           <motion.div
             initial="hidden" 
@@ -88,7 +63,7 @@ export default function PartnershipPage() {
           </motion.div>
           <Grid container spacing={3} justifyContent="center">
             {formats.map((format, index) => (
-              <Grid item xs={12} md={6} key={index}>
+              <Grid size={{ xs: 12, md: 6 }} key={index}>
                 <motion.div
                   variants={fadeScale}
                   initial="hidden"
@@ -114,7 +89,7 @@ export default function PartnershipPage() {
       </Box>
 
       {/* Партнеры получают */}
-      <Box sx={{ width: '100%', py: 10, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ width: '100%', py: { xs: 4, md: 6 }, display: 'flex', justifyContent: 'center' }}>
         <Container maxWidth="md">
           <motion.div
             initial="hidden" 
@@ -155,7 +130,7 @@ export default function PartnershipPage() {
       </Box>
 
       {/* CTA */}
-      <Box sx={{ width: '100%', py: 10, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ width: '100%', py: { xs: 4, md: 6 }, display: 'flex', justifyContent: 'center' }}>
         <Container maxWidth="lg">
           <motion.div
             initial="hidden" 

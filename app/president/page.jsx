@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
+import PageIntro from '@/components/PageIntro';
 import { motion } from 'framer-motion';
-import GradientText from '@/components/GradientText';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -15,20 +16,10 @@ const fadeScale = {
 
 export default function PresidentPage() {
   return (
-    <div className="w-full pt-20 pb-20">
+    <div className="w-full pt-6 pb-20">
       <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="max-w-4xl mx-auto">
-          <motion.h1 
-            initial="hidden" 
-            whileInView="visible" 
-            variants={fadeUp} 
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-4xl sm:text-5xl font-bold mb-12 text-center"
-          >
-            <GradientText>Президент федерации</GradientText>
-          </motion.h1>
-          
+          <PageIntro visual="president" title="Юрий Головко" label="Президент Федерации" />
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
@@ -40,9 +31,7 @@ export default function PresidentPage() {
             <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/60 overflow-hidden">
               <div className="md:flex">
                 <div className="md:w-1/3 bg-gray-200 flex items-center justify-center p-8">
-                  <div className="w-48 h-48 bg-gray-300 rounded-full flex items-center justify-center">
-                    <span className="text-6xl text-gray-500">👤</span>
-                  </div>
+                  <Image src="/president.jpeg" alt="Юрий Головко" width={240} height={300} className="rounded-2xl object-cover" />
                 </div>
                 
                 <div className="md:w-2/3 p-8">
@@ -62,7 +51,7 @@ export default function PresidentPage() {
 
                   <div className="bg-gradient-to-br from-blue-50/50 to-blue-100/30 backdrop-blur-xl p-6 rounded-xl border border-blue-200/50">
                     <p className="text-xl italic text-neutral-800 text-center md:text-left">
-                      "Федерация для меня — это не формальность, а инструмент реальных изменений."
+                      «Федерация для меня — это не формальность, а инструмент реальных изменений.»
                     </p>
                   </div>
                 </div>

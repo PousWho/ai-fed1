@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "server.js",
+  "main": "start.js",
   "scripts": {
-    "start": "node --env-file=.env server.js",
-    "dev": "node --watch --env-file=.env server.js"
+    "start": "node --env-file-if-exists=.env start.js",
+    "dev": "node --watch --env-file-if-exists=.env start.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -1,0 +1,44 @@
+/* Purposeful motion: circuits, project stages and confirmed actions. */
+.root { isolation: isolate; }
+.root :global(.viz-signal) { opacity: .9; filter: drop-shadow(0 0 5px #60d8ff); }
+.root :global(.viz-synapse) { filter: drop-shadow(0 0 4px #86dbff); }
+.root :global(.viz-node) rect { transition: stroke .3s, fill .3s; }
+.root:hover :global(.viz-node) rect { stroke: #83baff; }
+@media (prefers-reduced-motion: no-preference) {
+  .root :global(.viz-aura) { animation: viz-breathe 5s ease-in-out infinite; transform-origin: 210px 150px; }
+  .root :global(.viz-signal) { animation: viz-travel 4s linear infinite; }
+  .root :global(.viz-orbit) { animation: viz-orbit 18s linear infinite; }
+  .root :global(.viz-orbit-reverse) { animation-direction: reverse; animation-duration: 26s; }
+  .root :global(.viz-synapse) { animation: viz-synapse 3s ease-in-out infinite; }
+  .root :global(.viz-node) rect { animation: viz-node 6s ease-in-out var(--phase, 0s) infinite; }
+  .root :global(.viz-metric) { animation: viz-node 6s ease-in-out infinite; }
+  .root :global(.viz-trace) { animation: viz-draw 6s ease-in-out infinite; stroke-dasharray: 100; }
+  .root :global(.viz-check) { animation: viz-draw 6s ease-in-out infinite; stroke-dasharray: 100; }
+  .root :global(.viz-partner-left) { animation: viz-merge-left 6s ease-in-out infinite; }
+  .root :global(.viz-partner-right) { animation: viz-merge-right 6s ease-in-out infinite; }
+  .root :global(.viz-shield) { animation: viz-node 6s ease-in-out infinite; }
+  .root[data-running="false"] * { animation-play-state: paused !important; }
+}
+@keyframes viz-travel { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes viz-orbit { to { transform: rotate(360deg); } }
+@keyframes viz-breathe { 0%,100% { opacity: .5; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.08); } }
+@keyframes viz-synapse { 0%,100% { opacity: .4; stroke-width: 0; } 45% { opacity: 1; stroke: #9aefff; stroke-width: 4; } }
+@keyframes viz-node { 0%,30%,100% { stroke: #36516e; } 10%,20% { stroke: #9be8ff; fill: #204b74; } }
+@keyframes viz-draw { 0% { stroke-dashoffset: 100; opacity: .3; } 45%,85% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: .3; } }
+@keyframes viz-merge-left { 0%,100% { transform: translateX(-12px); } 45%,75% { transform: translateX(8px); } }
+@keyframes viz-merge-right { 0%,100% { transform: translateX(12px); } 45%,75% { transform: translateX(-8px); } }
+.scene { position: relative; aspect-ratio: 1; overflow: hidden; background: transparent; mask-image: radial-gradient(ellipse, #000 48%, transparent 74%); }
+.artwork { position: absolute; width: 100%; height: 100%; object-fit: contain; mask-image: radial-gradient(ellipse, #000 48%, transparent 74%); }
+.halo { position: absolute; inset: 12%; border-radius: 50%; background: #00bfff; filter: blur(65px); opacity: .2; }
+.internalEnergy { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
+.coreGlow { filter: blur(22px); opacity: .12; }
+.internalSignal { stroke-dasharray: 9 91; opacity: .6; filter: drop-shadow(0 0 5px #00cfff); }
+.coreNode { opacity: .4; filter: drop-shadow(0 0 7px #00dfff); }
+@media (prefers-reduced-motion: no-preference) {
+.coreGlow { animation: core-pulse 3.6s ease-in-out infinite; }
+.internalSignal { animation: neural-flow 3.2s linear infinite; }
+.coreNode { animation: node-pulse 2.8s ease-in-out infinite; }
+}
+@keyframes core-pulse { 0%,100% { opacity: .04; } 45% { opacity: .34; } 65% { opacity: .14; } 78% { opacity: .23; } }
+@keyframes neural-flow { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes node-pulse { 0%,100% { opacity: .15; } 45% { opacity: 1; } }

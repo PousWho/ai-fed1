@@ -46,3 +46,8 @@ next-env.d.ts
 .idea
 .vscode
 .cursor
+# Local document exports and scratch work (not website assets)
+/output/
+/tmp/
+/.claude/
+/run_log.txt
