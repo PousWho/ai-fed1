@@ -92,23 +92,6 @@ export default function HeroScreen() {
           </svg>
         </Box>
         <Box sx={{ minWidth: 0 }}>
-          {/* institutional label */}
-          <Box
-            component="p"
-            data-hero-rise
-            style={{ animationDelay: delay(0.05) }}
-            sx={{
-              m: 0,
-              color: '#80b5ff',
-              fontWeight: 600,
-              letterSpacing: '0.14em',
-              fontSize: 'clamp(0.72rem, 1vw, 0.88rem)',
-              textTransform: 'uppercase',
-            }}
-          >
-            {hero.label}
-          </Box>
-
           {/* H1 — реальный текстовый заголовок (SEO), крупная типографика */}
           <Box
             component="h1"
