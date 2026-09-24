@@ -1,0 +1,41 @@
+services:
+  frontend:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        CONTACT_API_ORIGIN: http://backend:4000
+    container_name: fii_frontend
+    restart: unless-stopped
+    env_file: ../.env
+    expose:
+      - "3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ../backend
+    container_name: fii_backend
+    restart: unless-stopped
+    env_file: ../backend/.env
+    expose:
+      - "4000"
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: fii_caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,9 @@
+# Единая точка входа: TLS сам получает и продлевает Let's Encrypt.
+# /api/contact на бэкенд не проксируем отдельно — это уже делает сам
+# Next.js через CONTACT_API_ORIGIN (см. next.config.js), поэтому сюда
+# достаточно завести весь трафик на frontend.
+xn--80ahcbqaa4d6aza4h.xn--p1ai, www.xn--80ahcbqaa4d6aza4h.xn--p1ai {
+	encode gzip
+
+	reverse_proxy frontend:3000
+}
