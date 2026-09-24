@@ -5,12 +5,12 @@
 xn--80ahcbqaa4d6aza4h.xn--p1ai, www.xn--80ahcbqaa4d6aza4h.xn--p1ai {
 	encode gzip
 
-	reverse_proxy frontend:3000
+	reverse_proxy 127.0.0.1:3000
 }
 
 # Временно, пока DNS домена не указывает на этот сервер: доступ по голому
 # IP через обычный HTTP (сертификат для IP не выпускается). Убрать этот
 # блок после переключения домена.
 :80 {
-	reverse_proxy frontend:3000
+	reverse_proxy 127.0.0.1:3000
 }

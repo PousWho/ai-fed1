@@ -11,8 +11,8 @@ services:
     dns:
       - 1.1.1.1
       - 8.8.8.8
-    expose:
-      - "3000"
+    ports:
+      - "127.0.0.1:3000:3000"
     depends_on:
       - backend
 
@@ -25,19 +25,14 @@ services:
     dns:
       - 1.1.1.1
       - 8.8.8.8
-    expose:
-      - "4000"
+    ports:
+      - "127.0.0.1:4000:4000"
 
   caddy:
     image: caddy:2-alpine
     container_name: fii_caddy
     restart: unless-stopped
-    dns:
-      - 1.1.1.1
-      - 8.8.8.8
-    ports:
-      - "80:80"
-      - "443:443"
+    network_mode: host
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
