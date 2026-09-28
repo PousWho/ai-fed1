@@ -6,13 +6,16 @@
   "main": "start.js",
   "scripts": {
     "start": "node --env-file-if-exists=.env start.js",
-    "dev": "node --watch --env-file-if-exists=.env start.js"
+    "dev": "node --watch --env-file-if-exists=.env start.js",
+    "migrate": "node --env-file-if-exists=.env migrate.js",
+    "test": "node --test"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "express-rate-limit": "^8.0.0",
     "nodemailer": "^9.0.3",
+    "pg": "^8.13.1",
     "zod": "^4.2.1"
   }
 }

@@ -8,3 +8,18 @@ services:
       # Прямой доступ извне позволил бы обходить rate-limit подделкой X-Forwarded-For.
       - "127.0.0.1:${PORT:-4000}:${PORT:-4000}"
     restart: unless-stopped
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: fii_postgres
+    env_file: .env
+    # Наружу не публикуется — доступ только из forms-api внутри сети compose.
+    # Для ручного доступа: docker compose exec postgres psql -U $POSTGRES_USER $POSTGRES_DB
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

@@ -239,8 +239,8 @@ export default function AboutPage() {
   ];
 
   return (
-    <Box sx={{ width: '100%', pt: 2 }}>
-      <Container maxWidth="lg"><PageIntro visual="about" title="О Федерации" description="Объединяем бизнес, разработчиков, науку и образование для практического развития искусственного интеллекта в России." /></Container>
+    <Box sx={{ width: '100%', pt: { xs: 3, md: 4 } }}>
+      <Container maxWidth="xl"><PageIntro visual="about" title="О Федерации" description="Объединяем бизнес, разработчиков, науку и образование для практического развития искусственного интеллекта в России." /></Container>
 
       {/* Миссия */}
       <Box sx={{ width: '100%', pt: { xs: 9, md: 14 }, pb: { xs: 5, md: 7 }, display: 'flex', justifyContent: 'center' }}>
@@ -441,7 +441,7 @@ export default function AboutPage() {
                   >
                     <Image
                       src="/president.jpeg"
-                      alt="Юрий Головко - Президент федерации"
+                      alt="Головко Юрий Викторович — президент Федерации"
                       fill
                       style={{ objectFit: 'cover' }}
                       priority
@@ -458,7 +458,7 @@ export default function AboutPage() {
                       color: 'primary.main'
                     }}
                   >
-                    Юрий Головко
+                    Головко Юрий Викторович
                   </Typography>
                   <Stack spacing={2} sx={{ mb: 4 }}>
                     <Typography 

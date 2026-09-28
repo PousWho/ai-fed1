@@ -18,9 +18,10 @@ const fadeUp = {
 export default function DirectionsPage() {
   return (
     <Box sx={{ width: '100%', py: { xs: 3, md: 4 }, backgroundColor: '#fbfbfa' }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5, lg: 6 } }}>
+      <Container maxWidth="xl">
         <PageIntro visual="directions" title={directions.h2} description={directions.subtitle} label={directions.label} />
-
+      </Container>
+      <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 4, md: 5, lg: 6 } }}>
         {/* 6 направлений по ТЗ лист 3 */}
         <Box role="list" sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {directions.items.map((it, index) => (

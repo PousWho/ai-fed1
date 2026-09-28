@@ -109,8 +109,10 @@ export default function ResultsPage() {
 
   return (
     <Box sx={{ width: '100%', pt: { xs: 3, md: 4 }, pb: 12, backgroundColor: '#fbfbfa' }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <PageIntro visual="results" title="От инициатив — к результатам" description="Два года работы Федерации: участие, проекты и результаты по ключевым направлениям." />
+      </Container>
+      <Container maxWidth="lg">
         {/* Статистика */}
         <motion.div {...reveal(0.16)}>
           <Box

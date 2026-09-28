@@ -8,6 +8,13 @@ services:
     container_name: fii_frontend
     restart: unless-stopped
     env_file: ../.env
+    environment:
+      # Рантайм-адрес бэка внутри сети compose. Build-arg выше действует только
+      # на сборку; эти переменные нужны на этапе запроса: NEWS_API_ORIGIN — для
+      # SSR-фетча новостей (lib/newsApi.js), CONTACT_API_ORIGIN — для rewrite
+      # /api/contact в next.config.js. Не зависят от ручного ../.env на сервере.
+      NEWS_API_ORIGIN: http://backend:4000
+      CONTACT_API_ORIGIN: http://backend:4000
     dns:
       - 1.1.1.1
       - 8.8.8.8
@@ -27,6 +34,23 @@ services:
       - 8.8.8.8
     ports:
       - "127.0.0.1:4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: fii_postgres
+    restart: unless-stopped
+    env_file: ../backend/.env
+    # Не публикуется наружу: доступ только из backend внутри сети compose.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   caddy:
     image: caddy:2-alpine
@@ -43,3 +67,4 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+  postgres_data:

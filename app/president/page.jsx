@@ -16,11 +16,11 @@ const fadeScale = {
 
 export default function PresidentPage() {
   return (
-    <div className="w-full pt-6 pb-20">
-      <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+    <div className="w-full pt-6 md:pt-8 pb-20">
+      <div className="w-full max-w-[1536px] px-4 sm:px-6 lg:px-8 mx-auto">
+        <PageIntro visual="president" title="Головко Юрий Викторович" label="Президент Федерации" />
         <div className="max-w-4xl mx-auto">
-          <PageIntro visual="president" title="Юрий Головко" label="Президент Федерации" />
-          <motion.div 
+          <motion.div
             initial="hidden" 
             whileInView="visible" 
             variants={fadeScale} 
@@ -31,11 +31,11 @@ export default function PresidentPage() {
             <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/60 overflow-hidden">
               <div className="md:flex">
                 <div className="md:w-1/3 bg-gray-200 flex items-center justify-center p-8">
-                  <Image src="/president.jpeg" alt="Юрий Головко" width={240} height={300} className="rounded-2xl object-cover" />
+                  <Image src="/president.jpeg" alt="Головко Юрий Викторович" width={240} height={300} className="rounded-2xl object-cover" />
                 </div>
                 
                 <div className="md:w-2/3 p-8">
-                  <h2 className="text-3xl font-bold mb-6 text-blue-600 text-center md:text-left">Юрий Головко</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-blue-600 text-center md:text-left">Головко Юрий Викторович</h2>
                   
                   <div className="space-y-4 text-lg text-neutral-700 leading-relaxed mb-8">
                     <p className="text-center md:text-left">

@@ -11,7 +11,7 @@ const sections = [
  ['Подтверждение согласия', 'Я подтверждаю согласие отдельной отметкой в форме и отправкой обращения. Отметка не устанавливается заранее. Вместе с обращением фиксируются факт согласия, дата получения и редакция настоящего текста.'],
 ];
 export default function ConsentPage() {
- return <Box sx={{ pt: 3, pb: 8 }}><Container maxWidth="lg"><PageIntro visual="consent" title="Согласие на обработку персональных данных" label="Правовая информация" description="Редакция от 11 сентября 2026 года. Для форм обратной связи, вступления и партнёрства." /><Box sx={{ maxWidth: 800, mx: 'auto' }}>
+ return <Box sx={{ pt: 3, pb: 8 }}><Container maxWidth="xl"><PageIntro visual="consent" title="Согласие на обработку персональных данных" label="Правовая информация" description="Редакция от 11 сентября 2026 года. Для форм обратной связи, вступления и партнёрства." /></Container><Container maxWidth="lg"><Box sx={{ maxWidth: 800, mx: 'auto' }}>
   {sections.map(([title, text]) => <Box component="section" key={title} sx={{ mb: 4 }}><Typography variant="h5" component="h2" sx={{ mb: 1.5 }}>{title}</Typography><Typography color="text.secondary">{text}</Typography></Box>)}
   <Link href="/privacy">Политика обработки персональных данных</Link>
  </Box></Container></Box>;

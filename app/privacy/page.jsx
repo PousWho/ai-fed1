@@ -87,9 +87,10 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <Box sx={{ width: '100%', pt: { xs: 3, md: 4 }, pb: 12, backgroundColor: '#fbfbfa' }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <PageIntro visual="privacy" title="Политика обработки персональных данных" label="Правовая информация" />
-
+      </Container>
+      <Container maxWidth="lg">
         {sections.map((s) => (
           <Box key={s.h} sx={{ mb: 5 }}>
             <Typography variant="h5" component="h2" sx={{ fontWeight: 700, color: GRAPHITE, mb: 1.5, fontSize: { xs: '1.1rem', md: '1.3rem' } }}>

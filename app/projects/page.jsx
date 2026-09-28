@@ -34,8 +34,8 @@ const projects = [
 
 export default function ProjectsPage() {
   return (
-    <Box sx={{ width: '100%', pt: 2 }}>
-      <Container maxWidth="lg"><PageIntro visual="projects" title="Продукты и проекты" description="Развиваем решения в области искусственного интеллекта и автоматизации — от конкретной задачи до практического результата." /></Container>
+    <Box sx={{ width: '100%', pt: { xs: 3, md: 4 } }}>
+      <Container maxWidth="xl"><PageIntro visual="projects" title="Продукты и проекты" description="Развиваем решения в области искусственного интеллекта и автоматизации — от конкретной задачи до практического результата." /></Container>
 
       {/* Проекты */}
       <Box sx={{ width: '100%', py: { xs: 4, md: 6 }, display: 'flex', justifyContent: 'center' }}>

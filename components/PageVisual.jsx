@@ -43,9 +43,8 @@ const energyMaps = {
   partnership: { glow: [475, 147, 92, 95], paths: ['M405 170 Q400 100 455 80 T530 120 Q565 160 520 190', 'M420 145 Q465 110 490 150 T535 165', 'M140 430 L220 480 L295 510 L355 560', 'M850 430 L775 490 L700 535 L650 575'] },
 };
 function InternalEnergy({ artwork }) {
-  const { glow: [cx, cy, rx, ry], paths } = energyMaps[artwork];
+  const { paths } = energyMaps[artwork];
   return <svg className={styles.internalEnergy} viewBox="0 0 1000 1000" aria-hidden="true">
-    <ellipse className={styles.coreGlow} cx={cx} cy={cy} rx={rx} ry={ry} fill="#00cfff" />
     <g fill="none" stroke="#b6faff" strokeLinecap="round">
       {paths.map((d, i) => <path key={d} className={styles.internalSignal} d={d} pathLength="100" strokeWidth="3" style={{ animationDelay: `${i * -.8}s` }} />)}
     </g>
@@ -68,10 +67,10 @@ export default function PageVisual({ variant }) {
   const caption = captions[variant];
   if (!caption) return null;
   const artwork = { about: 'brain', directions: 'directions', projects: 'architecture', results: 'results', news: 'news', president: 'architecture', partnership: 'partnership', contacts: 'partnership' }[variant];
-  if (artwork) return <Box component="figure" ref={figureRef} className={styles.root} data-running={visible && !reduce ? 'true' : 'false'} sx={{ m: 0, width: '100%', maxWidth: 520, mx: 'auto', minWidth: 0 }}>
+  if (artwork) return <Box component="figure" ref={figureRef} className={styles.root} data-running={visible && !reduce ? 'true' : 'false'} sx={{ m: 0, width: '100%', maxWidth: { xs: 350, md: 500 }, mx: 'auto', minWidth: 0 }}>
     <div className={styles.scene}>
       <div className={styles.halo} aria-hidden="true" />
-      <Image className={styles.artwork} src={`/visuals/neural-${artwork}.png`} alt={caption} width={1254} height={1254} sizes="(max-width: 899px) 90vw, 520px" preload />
+      <Image className={styles.artwork} src={`/visuals/neural-${artwork}.png`} alt={caption} width={1254} height={1254} sizes="(max-width: 899px) 90vw, 500px" preload />
       <InternalEnergy artwork={artwork} />
     </div>
     <Box component="figcaption" sx={{ color: '#a5bfd8', fontSize: 13, textAlign: 'center', mt: 1 }}>{caption}</Box>

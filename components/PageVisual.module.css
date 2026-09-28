@@ -27,18 +27,15 @@
 @keyframes viz-draw { 0% { stroke-dashoffset: 100; opacity: .3; } 45%,85% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: .3; } }
 @keyframes viz-merge-left { 0%,100% { transform: translateX(-12px); } 45%,75% { transform: translateX(8px); } }
 @keyframes viz-merge-right { 0%,100% { transform: translateX(12px); } 45%,75% { transform: translateX(-8px); } }
-.scene { position: relative; aspect-ratio: 1; overflow: hidden; background: transparent; mask-image: radial-gradient(ellipse, #000 48%, transparent 74%); }
-.artwork { position: absolute; width: 100%; height: 100%; object-fit: contain; mask-image: radial-gradient(ellipse, #000 48%, transparent 74%); }
-.halo { position: absolute; inset: 12%; border-radius: 50%; background: #00bfff; filter: blur(65px); opacity: .2; }
-.internalEnergy { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
-.coreGlow { filter: blur(22px); opacity: .12; }
-.internalSignal { stroke-dasharray: 9 91; opacity: .6; filter: drop-shadow(0 0 5px #00cfff); }
-.coreNode { opacity: .4; filter: drop-shadow(0 0 7px #00dfff); }
+.scene { position: relative; aspect-ratio: 1; overflow: hidden; background: transparent; mask-image: radial-gradient(ellipse, #000 42%, rgba(0,0,0,.7) 57%, transparent 74%); }
+.artwork { position: absolute; width: 100%; height: 100%; object-fit: contain; filter: saturate(.65) brightness(.9); }
+.halo { position: absolute; inset: 12%; border-radius: 50%; background: #6d8ca8; filter: blur(65px); opacity: .035; }
+.internalEnergy { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .4; }
+.internalSignal { stroke-dasharray: 9 91; opacity: .45; filter: drop-shadow(0 0 2px #719bad); }
+.coreNode { opacity: .3; filter: drop-shadow(0 0 2px #719bad); }
 @media (prefers-reduced-motion: no-preference) {
-.coreGlow { animation: core-pulse 3.6s ease-in-out infinite; }
-.internalSignal { animation: neural-flow 3.2s linear infinite; }
-.coreNode { animation: node-pulse 2.8s ease-in-out infinite; }
+.internalSignal { animation: neural-flow 6s linear infinite; }
+.coreNode { animation: node-pulse 5s ease-in-out infinite; }
 }
-@keyframes core-pulse { 0%,100% { opacity: .04; } 45% { opacity: .34; } 65% { opacity: .14; } 78% { opacity: .23; } }
 @keyframes neural-flow { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
-@keyframes node-pulse { 0%,100% { opacity: .15; } 45% { opacity: 1; } }
+@keyframes node-pulse { 0%,100% { opacity: .2; } 50% { opacity: .5; } }

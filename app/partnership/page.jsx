@@ -46,8 +46,8 @@ export default function PartnershipPage() {
   ];
 
   return (
-    <Box sx={{ width: '100%', pt: 2 }}>
-      <Container maxWidth="lg"><PageIntro visual="partnership" title="Партнёрство" description="Соединяем экспертизу, технологии и инициативы. Открыты к совместным программам и проектам." /></Container>
+    <Box sx={{ width: '100%', pt: { xs: 3, md: 4 } }}>
+      <Container maxWidth="xl"><PageIntro visual="partnership" title="Партнёрство" description="Соединяем экспертизу, технологии и инициативы. Открыты к совместным программам и проектам." /></Container>
 
       {/* Форматы партнерства */}
       <Box sx={{ width: '100%', py: { xs: 4, md: 6 }, display: 'flex', justifyContent: 'center' }}>

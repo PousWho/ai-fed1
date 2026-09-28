@@ -3,8 +3,15 @@ import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { z } from 'zod';
 import { sendContactEmail } from './email.js';
+import { createNewsRepository } from './newsRepository.js';
+import { createNewsRouter } from './newsRoutes.js';
+import { requireNewsToken } from './newsAuth.js';
 
-export function createApp({ sendEmail = sendContactEmail } = {}) {
+export function createApp({
+  sendEmail = sendContactEmail,
+  newsRepo = createNewsRepository(),
+  newsToken = process.env.NEWS_API_TOKEN,
+} = {}) {
 const app = express();
 
 // Опечатка в числовой переменной не должна молча отключать лимит или ломать порт
@@ -70,9 +77,38 @@ const contactSchema = z.object({
   website: z.string().max(200).optional(),
 });
 
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
+app.get('/health', async (req, res) => {
+  try {
+    await newsRepo.ping();
+    res.json({ status: 'ok', database: 'ok' });
+  } catch (error) {
+    console.error('Health check: database unavailable:', error);
+    res.status(503).json({ status: 'degraded', database: 'error' });
+  }
 });
+
+const newsReadLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  limit: parsePositiveInt(process.env.NEWS_READ_RATE_LIMIT, 120),
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: { error: 'Слишком много запросов. Пожалуйста, попробуйте позже.' },
+});
+
+const newsWriteLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  limit: parsePositiveInt(process.env.NEWS_WRITE_RATE_LIMIT, 30),
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: { error: 'Слишком много запросов. Пожалуйста, попробуйте позже.' },
+});
+
+app.use(createNewsRouter({
+  repo: newsRepo,
+  requireAuth: requireNewsToken(() => newsToken),
+  readLimiter: newsReadLimiter,
+  writeLimiter: newsWriteLimiter,
+}));
 
 app.post('/api/contact', contactLimiter, async (req, res) => {
   try {
