@@ -1,16 +1,35 @@
 # Единая точка входа: TLS сам получает и продлевает Let's Encrypt.
 # /api/contact на бэкенд не проксируем отдельно — это уже делает сам
-# Next.js через CONTACT_API_ORIGIN (см. next.config.js), поэтому сюда
-# достаточно завести весь трафик на frontend.
+# Next.js через CONTACT_API_ORIGIN (см. next.config.js), поэтому весь
+# обычный трафik идёт на frontend.
+#
+# Исключение — API новостей: его дёргает внешняя система (Telegram-бот
+# YuraAICommand_bot) с другого хоста, поэтому /api/news* и /api/admin/*
+# заводим напрямую на backend (127.0.0.1:4000). Закрытые операции всё равно
+# защищены Bearer-токеном (NEWS_API_TOKEN), CORS на них не влияет.
 xn--80ahcbqaa4d6aza4h.xn--p1ai, www.xn--80ahcbqaa4d6aza4h.xn--p1ai {
 	encode gzip
 
-	reverse_proxy 127.0.0.1:3000
+	@newsapi path /api/news /api/news/* /api/admin/*
+	handle @newsapi {
+		reverse_proxy 127.0.0.1:4000
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:3000
+	}
 }
 
 # Временно, пока DNS домена не указывает на этот сервер: доступ по голому
 # IP через обычный HTTP (сертификат для IP не выпускается). Убрать этот
 # блок после переключения домена.
 :80 {
-	reverse_proxy 127.0.0.1:3000
+	@newsapi path /api/news /api/news/* /api/admin/*
+	handle @newsapi {
+		reverse_proxy 127.0.0.1:4000
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:3000
+	}
 }
