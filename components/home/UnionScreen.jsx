@@ -11,16 +11,14 @@ const ACCENT = '#0039a6';
 const GRAPHITE = '#1a1d21';
 const destinations = { business: '/partnership', tech: '/projects', science: '/directions#science-tech', education: '/directions#education', state: '/directions#state' };
 
-// Асимметричная распределённая композиция (0..1) в правой панели.
-// НЕ «Федерация в центре + 5 вокруг»: Федерация смещена и является одним
-// из участников сети, а не управляющим центром (ТЗ п.10, п.12).
+// Федерация в центре композиции; участники также связаны между собой.
 const POS = {
   business: { x: 0.16, y: 0.33 },
   science: { x: 0.46, y: 0.14 },
   tech: { x: 0.82, y: 0.24 },
   education: { x: 0.22, y: 0.76 },
   state: { x: 0.6, y: 0.87 },
-  federation: { x: 0.68, y: 0.55 },
+  federation: { x: 0.5, y: 0.5 },
 };
 
 // Рёбра: связи существуют не только через Федерацию (ТЗ п.13) — это экосистема.
@@ -322,18 +320,17 @@ export default function UnionScreen() {
                 sx={{
                   position: 'absolute',
                   left: `${POS.federation.x * 100}%`,
-                  top: `${POS.federation.y * 100 + 5}%`,
-                  transform: 'translate(-50%, 0)',
-                  fontSize: '0.72rem',
+                  top: `${POS.federation.y * 100}%`,
+                  transform: 'translate(-50%, -50%)',
+                  fontSize: 'clamp(.8rem, 1.3vw, 1.1rem)',
                   fontWeight: 600,
                   letterSpacing: '0.02em',
-                  color: ACCENT,
                   textAlign: 'center',
-                  maxWidth: 150,
+                  width: '44%',
                   lineHeight: 1.25,
                   pointerEvents: 'auto',
                   textDecoration: 'none',
-                  background: 'linear-gradient(135deg, #1c98e5, #0039a6)',
+                  background: 'rgba(5, 17, 34, .95)',
                   color: '#fff',
                   p: 1.5,
                   borderRadius: 3,
@@ -342,7 +339,9 @@ export default function UnionScreen() {
                   '&:focus-visible': { outline: '3px solid #639eff', outlineOffset: 4 },
                 }}
               >
-                {union.federationNode}
+                <Box component="span" sx={{ display: 'block', color: '#fff' }}>Федерация</Box>
+                <Box component="span" sx={{ display: 'block', color: '#639eff' }}>искусственного</Box>
+                <Box component="span" sx={{ display: 'block', color: '#ff6b70' }}>интеллекта</Box>
               </Box>
             </Box>
           </Box>

@@ -1,6 +1,7 @@
 import HeroScreen from '@/components/home/HeroScreen';
 import UnionScreen from '@/components/home/UnionScreen';
 import DirectionsScreen from '@/components/home/DirectionsScreen';
+import PresidentScreen from '@/components/home/PresidentScreen';
 
 const SITE_URL = 'https://федерацияии.рф';
 
@@ -37,6 +38,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
       <HeroScreen />
+      <PresidentScreen />
       <UnionScreen />
       <DirectionsScreen />
     </>

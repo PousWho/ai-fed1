@@ -23,7 +23,6 @@ import { track } from '@/lib/analytics';
 
 const ACCENT = '#0039a6';
 const GRAPHITE = '#1a1d21';
-const RED = '#d52b1e';
 
 const navLinks = [
   { label: 'О Федерации', href: '/about' },
@@ -47,9 +46,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Прозрачный header только на главной у самого верха; при скролле — лёгкий фон.
-  const transparent = isHome && !scrolled && !isMenuOpen;
-
   const handleLogoClick = (e) => {
     if (isHome) {
       e.preventDefault();
@@ -63,10 +59,10 @@ export default function Header() {
       elevation={0}
       sx={{
         zIndex: 1300,
-        backgroundColor: transparent ? 'transparent' : 'rgba(251,251,250,0.82)',
-        backdropFilter: transparent ? 'none' : 'blur(14px) saturate(160%)',
-        WebkitBackdropFilter: transparent ? 'none' : 'blur(14px) saturate(160%)',
-        borderBottom: transparent ? '1px solid transparent' : '1px solid rgba(0,0,0,0.07)',
+        backgroundColor: scrolled ? 'rgba(9, 19, 34, .97)' : '#0b1422',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
         boxShadow: 'none',
         transition: 'background-color .3s ease, border-color .3s ease, backdrop-filter .3s ease',
         '&::before': { display: 'none' },
@@ -113,15 +109,15 @@ export default function Header() {
               <Box
                 component="span"
                 sx={{
-                  color: GRAPHITE,
+                  color: '#fff',
                 }}
               >
                 Федерация
               </Box>
-              <Box component="span" sx={{ color: ACCENT }}>
+              <Box component="span" sx={{ color: '#639eff' }}>
                 искусственного
               </Box>{' '}
-              <Box component="span" sx={{ color: RED }}>
+              <Box component="span" sx={{ color: '#ff6b70' }}>
                 интеллекта
               </Box>
             </Box>
@@ -136,7 +132,7 @@ export default function Header() {
                   <Button
                     disableRipple
                     sx={{
-                      color: activeLink ? ACCENT : GRAPHITE,
+                      color: activeLink ? '#639eff' : '#e6edf5',
                       fontWeight: 500,
                       fontSize: '0.95rem',
                       textTransform: 'none',
@@ -150,8 +146,8 @@ export default function Header() {
                       borderRadius: '8px',
                       '&::before': { display: 'none' },
                       '&:hover': {
-                        color: ACCENT,
-                        backgroundColor: 'rgba(0,57,166,0.06)',
+                        color: '#8cb8ff',
+                        backgroundColor: 'rgba(99,158,255,0.1)',
                         transform: 'none',
                         boxShadow: 'none',
                       },
@@ -198,7 +194,7 @@ export default function Header() {
               aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
               aria-expanded={isMenuOpen}
               onClick={() => setIsMenuOpen((v) => !v)}
-              sx={{ color: GRAPHITE }}
+              sx={{ color: '#fff' }}
             >
               {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </IconButton>
