@@ -120,6 +120,10 @@ export default function AboutPage() {
 
   const certificates = [
     {
+      title: 'Благодарность Юрию Головко за участие в Global Tech Forum «Цифровизация и автоматизация бизнеса» — 16 октября 2026, Москва',
+      image: '/certificates/golovko-gtf-2026.png',
+    },
+    {
       title: 'Благодарственное письмо за значительный вклад в реализацию проекта «Коик»',
       image: '/certificates/Cert 0-cropped.png',
     },
